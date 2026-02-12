@@ -1,1 +1,1 @@
-# Welcome to your Lovable personal portfolio
+# Welcome to my personal portfolio
