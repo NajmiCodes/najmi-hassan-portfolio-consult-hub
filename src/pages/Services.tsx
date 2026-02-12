@@ -3,6 +3,13 @@ import { Layout } from "@/components/layout/Layout";
 import { FileText, MessageSquare, Video, Check, ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+// Map each service id to its Stripe Payment Link from environment variables
+const paymentLinks: Record<string, string> = {
+  cv: import.meta.env.VITE_STRIPE_LINK_CV || "",
+  sop: import.meta.env.VITE_STRIPE_LINK_SOP || "",
+  call: import.meta.env.VITE_STRIPE_LINK_CALL || "",
+};
+
 const services = [
   {
     id: "cv",
@@ -56,10 +63,39 @@ const services = [
 const Services = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const handleBookNow = (serviceId: string) => {
     setSelectedService(serviceId);
+    setName("");
+    setEmail("");
+    setError("");
     setShowModal(true);
+  };
+
+  const handleProceedToPayment = () => {
+    // Validate inputs
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    const link = paymentLinks[selectedService || ""];
+    if (!link) {
+      setError("Payment is not configured for this service. Please contact us directly.");
+      return;
+    }
+
+    // Redirect to Stripe Payment Link with prefilled email
+    const separator = link.includes("?") ? "&" : "?";
+    const checkoutUrl = `${link}${separator}prefilled_email=${encodeURIComponent(email)}&client_reference_id=${encodeURIComponent(name)}`;
+    window.location.href = checkoutUrl;
   };
 
   const service = services.find((s) => s.id === selectedService);
@@ -160,7 +196,7 @@ const Services = () => {
               },
               {
                 q: "What payment methods do you accept?",
-                a: "We accept payments via PayPal, Wise, and bank transfer for international clients.",
+                a: "We accept credit/debit cards and other methods via Stripe's secure payment platform.",
               },
             ].map((faq, index) => (
               <div key={index} className="card-elevated p-5">
@@ -202,22 +238,30 @@ const Services = () => {
                 <input
                   type="text"
                   placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => { setName(e.target.value); setError(""); }}
                   className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
                 <input
                   type="email"
                   placeholder="Your Email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setError(""); }}
                   className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
 
+              {error && (
+                <p className="text-sm text-red-500 text-center">{error}</p>
+              )}
+
               <div className="pt-4 border-t border-border">
-                <Button variant="gradient" className="w-full" size="lg">
+                <Button variant="gradient" className="w-full" size="lg" onClick={handleProceedToPayment}>
                   Proceed to Payment
                   <ArrowRight className="w-5 h-5" />
                 </Button>
                 <p className="text-xs text-muted-foreground text-center mt-3">
-                  You'll be redirected to our secure payment page
+                  You'll be redirected to Stripe's secure payment page
                 </p>
               </div>
             </div>
