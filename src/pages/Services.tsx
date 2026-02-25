@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
-import { FileText, MessageSquare, Video, Check, ArrowRight, X } from "lucide-react";
+import { FileText, MessageSquare, Video, Check, ArrowRight, X, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Map each service id to its Stripe Payment Link from environment variables
 const paymentLinks: Record<string, string> = {
-  cv: import.meta.env.VITE_STRIPE_LINK_CV || "",
-  sop: import.meta.env.VITE_STRIPE_LINK_SOP || "",
-  call: import.meta.env.VITE_STRIPE_LINK_CALL || "",
+  cv: import.meta.env.VITE_SAFEPAY_LINK_CV || "",
+  sop: import.meta.env.VITE_SAFEPAY_LINK_SOP || "",
+  call: import.meta.env.VITE_SAFEPAY_LINK_CALL || "",
 };
 
 const services = [
@@ -17,6 +16,7 @@ const services = [
     title: "CV Review",
     description: "Get detailed feedback on your CV to make it stand out to admissions committees.",
     price: 5,
+    pricePKR: 1400,
     features: [
       "Comprehensive structure review",
       "Content clarity improvements",
@@ -32,6 +32,7 @@ const services = [
     title: "SOP Review",
     description: "Expert review of your Statement of Purpose for MS/PhD applications.",
     price: 7,
+    pricePKR: 2000,
     features: [
       "Narrative flow analysis",
       "Motivation clarity check",
@@ -48,6 +49,7 @@ const services = [
     title: "1-to-1 Online Call",
     description: "Personalized consultation to discuss your application strategy.",
     price: 15,
+    pricePKR: 4200,
     features: [
       "30-minute video call",
       "Application strategy discussion",
@@ -76,7 +78,6 @@ const Services = () => {
   };
 
   const handleProceedToPayment = () => {
-    // Validate inputs
     if (!name.trim()) {
       setError("Please enter your name.");
       return;
@@ -92,7 +93,6 @@ const Services = () => {
       return;
     }
 
-    // Redirect to Stripe Payment Link with prefilled email
     const separator = link.includes("?") ? "&" : "?";
     const checkoutUrl = `${link}${separator}prefilled_email=${encodeURIComponent(email)}&client_reference_id=${encodeURIComponent(name)}`;
     window.location.href = checkoutUrl;
@@ -149,6 +149,9 @@ const Services = () => {
                     ${service.price}
                   </span>
                   <span className="text-muted-foreground text-sm ml-1">USD</span>
+                  <div className="text-sm text-muted-foreground mt-1">
+                    PKR {service.pricePKR.toLocaleString()}
+                  </div>
                 </div>
 
                 <ul className="space-y-3 mb-6 flex-grow">
@@ -196,7 +199,7 @@ const Services = () => {
               },
               {
                 q: "What payment methods do you accept?",
-                a: "We accept credit/debit cards and other methods via Stripe's secure payment platform.",
+                a: "We accept Visa, Mastercard, JazzCash, Easypaisa, and bank transfers via SafePay's secure payment platform. Both Pakistani and international clients are supported.",
               },
             ].map((faq, index) => (
               <div key={index} className="card-elevated p-5">
@@ -228,9 +231,14 @@ const Services = () => {
               <div className="p-4 rounded-xl bg-muted/50">
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">{service.title}</span>
-                  <span className="font-display font-semibold text-foreground">
-                    ${service.price}
-                  </span>
+                  <div className="text-right">
+                    <span className="font-display font-semibold text-foreground">
+                      ${service.price} USD
+                    </span>
+                    <div className="text-xs text-muted-foreground">
+                      PKR {service.pricePKR.toLocaleString()}
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -261,8 +269,14 @@ const Services = () => {
                   <ArrowRight className="w-5 h-5" />
                 </Button>
                 <p className="text-xs text-muted-foreground text-center mt-3">
-                  You'll be redirected to Stripe's secure payment page
+                  You'll be redirected to SafePay's secure payment page
                 </p>
+                <div className="flex items-center justify-center gap-1.5 mt-2">
+                  <Lock className="w-3 h-3 text-muted-foreground" />
+                  <span className="text-xs text-muted-foreground">
+                    Secured by SafePay — PCI-DSS Compliant
+                  </span>
+                </div>
               </div>
             </div>
           </div>

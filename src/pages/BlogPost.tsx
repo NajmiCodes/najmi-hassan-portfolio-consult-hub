@@ -290,6 +290,46 @@ const blogPostContent: Record<string, { title: string; date: string; readTime: s
       </>
     ),
   },
+  "6": {
+    title: "Getting Strong Letters of Recommendation",
+    date: "2025-01-05",
+    readTime: "4 min read",
+    category: "Application Tips",
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=600&fit=crop",
+    content: (
+      <>
+        <h2>Crafting a Standout Letter of Recommendation for CS Graduate Admissions</h2>
+        <p>Computer Science graduate programs are more competitive than ever. With applicant pools filled with near-perfect GPAs and impressive GRE scores, admissions committees at top-tier institutions rely heavily on Letters of Recommendation (LoRs) to differentiate between candidates.</p>
+        <p>A strong LoR doesn't just confirm a student's transcript; it provides a compelling, evidence-based narrative about their potential for rigorous graduate study and research. Whether you are a professor, an industry manager, or a research advisor, here is a guide to writing an impactful recommendation letter for a prospective CS graduate student.</p>
+
+        <h2>1. Anchor the Letter in Specifics, Not Generalities</h2>
+        <p>The most common pitfall in recommendation letters is relying on generic praise. Saying a student is "hardworking and smart" adds zero value to their application. Instead, adopt a "show, don't tell" philosophy.</p>
+        <p><strong>Weak:</strong> "Alex is an excellent programmer who always finished assignments on time."</p>
+        <p><strong>Strong:</strong> "For their final compiler design project, Alex didn't just meet the baseline requirements; they independently implemented an advanced optimization pass that reduced execution time by 15%, showcasing a deep understanding of LLVM."</p>
+
+        <h2>2. Highlight Core Competencies for CS</h2>
+        <p>Admissions committees are looking for indicators that a student will succeed in a demanding technical environment. Be sure to address the following areas if you have observed them:</p>
+        <p><strong>Research Potential (Crucial for PhDs):</strong> Did the student demonstrate intellectual curiosity? Could they read complex papers, identify gaps, and propose novel solutions? Mention specific contributions to published papers, workshops, or independent study projects.</p>
+        <p><strong>Technical Proficiency:</strong> Move beyond stating that they know Python or C++. Discuss the scale and complexity of the systems they have built, their mathematical maturity (crucial for AI/ML or cryptography applicants), or their ability to quickly master new frameworks.</p>
+        <p><strong>Resilience in Problem Solving:</strong> CS research involves a lot of debugging—both of code and of ideas. Share an anecdote about a time the student faced a significant technical roadblock and how they navigated it.</p>
+        <blockquote><strong>Pro-Tip:</strong> If the student is applying for a specific subfield (e.g., Human-Computer Interaction, Cybersecurity, or Machine Learning), tailor your examples to highlight skills relevant to that niche.</blockquote>
+
+        <h2>3. Structure for Maximum Impact</h2>
+        <p>Faculty reading thousands of applications appreciate a letter that is clear, well-organized, and direct.</p>
+        <p><strong>Introduction:</strong> State clearly who you are recommending, for what program, and the nature and duration of your relationship with the student. (e.g., "I was Sarah's primary investigator for two years in the Distributed Systems Lab.")</p>
+        <p><strong>The "Meat" (2-3 Body Paragraphs):</strong> Dedicate each paragraph to a specific trait or project. Use the CAR method (Context, Action, Result) to structure these anecdotes.</p>
+        <p><strong>Meaningful Comparisons:</strong> Contextualize the student's abilities. Statements like, "David is among the top 5% of undergraduate researchers I have mentored in my ten years at [University]" carry significant weight.</p>
+        <p><strong>Conclusion:</strong> Provide a definitive endorsement of their readiness for graduate-level work and their potential future impact on the field.</p>
+
+        <h2>4. What to Avoid</h2>
+        <p><strong>Rehashing the Resume:</strong> The admissions committee already has the student's CV. Do not waste space listing every technology they know or every grade they received. Provide the context that the CV lacks.</p>
+        <p><strong>The "Did Well in My Class" Letter:</strong> If your only interaction with the student was them getting an 'A' in your large lecture course, your letter will likely be weak. If you must write it, focus heavily on their final project or specific insightful questions they asked in office hours.</p>
+        <p><strong>Unconscious Bias:</strong> Be mindful of the language you use. Research shows that letters for women and underrepresented minorities often over-index on "grind" traits (e.g., "hardworking," "diligent") rather than "brilliance" traits (e.g., "innovative," "visionary"). Ensure you are highlighting their intellectual horsepower.</p>
+
+        <p>Writing a high-quality letter of recommendation is a time-consuming but vital contribution to the next generation of computer scientists. By focusing on concrete technical achievements, research potential, and specific anecdotes, you can provide an applicant with a crucial edge in a crowded field.</p>
+      </>
+    ),
+  },
 };
 
 const BlogPost = () => {

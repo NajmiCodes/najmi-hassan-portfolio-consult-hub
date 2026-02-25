@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, FileText, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 
@@ -30,12 +30,6 @@ const Index = () => {
                 <Link to="/projects">
                   View Projects
                   <ArrowRight className="w-5 h-5" />
-                </Link>
-              </Button>
-              <Button asChild variant="hero-outline" size="lg">
-                <Link to="/services">
-                  <FileText className="w-5 h-5" />
-                  Book a Review
                 </Link>
               </Button>
             </div>

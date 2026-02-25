@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
@@ -9,8 +8,8 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
-  { href: "/services", label: "Services" },
   { href: "/blog", label: "Blog" },
+  { href: "/services", label: "Services" },
 ];
 
 export const Navbar = () => {
@@ -44,13 +43,6 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button asChild variant="gradient" size="sm">
-              <Link to="/services">Book a Review</Link>
-            </Button>
-          </div>
-
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 rounded-lg hover:bg-secondary"
@@ -79,13 +71,6 @@ export const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-2 px-4">
-                <Button asChild variant="gradient" className="w-full">
-                  <Link to="/services" onClick={() => setIsOpen(false)}>
-                    Book a Review
-                  </Link>
-                </Button>
-              </div>
             </div>
           </div>
         )}
