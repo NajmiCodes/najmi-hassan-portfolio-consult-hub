@@ -18,7 +18,7 @@ const hackathonProjects: Project[] = [
     tools: ["Llama", "Groq", "Fetch.ai", "Python", "TypeScript", "Node.js"],
     type: "hackathon",
     highlights: ["RAISE YOUR HACK Hackathon", "2nd Place Winner"],
-    link: "#",
+    link: "https://lablab.ai/ai-hackathons/raise-your-hack/jroq-prosus-track/fashion-ai?_gl=1*fo36ye*_up*MQ..*_ga*MTEwODMzNzM0MC4xNzcyMDE3OTA0*_ga_0DKXC1L0Y7*czE3NzIwMTc5MDQkbzEkZzAkdDE3NzIwMTc5MDQkajYwJGwwJGg2MjI0MTcxNjI.",
   },
   {
     title: "GeneGazer - Bioinformatics Tool",
