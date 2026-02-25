@@ -26,7 +26,7 @@ const hackathonProjects: Project[] = [
     tools: ["Gemini", "Python", "Streamlit", "Scanpy", "Leiden Algorithm"],
     type: "hackathon",
     highlights: ["Trae AI IDE Hackathon"],
-    link: "#",
+    link: "https://lablab.ai/ai-hackathons/code-craft-ai-x-dev-hackathon/goat-trae-hack/genegazer?_gl=1*1bgibpw*_up*MQ..*_ga*MTEwODMzNzM0MC4xNzcyMDE3OTA0*_ga_0DKXC1L0Y7*czE3NzIwMTc5MDQkbzEkZzAkdDE3NzIwMTc5MDQkajYwJGwwJGg2MjI0MTcxNjI.",
   },
   {
     title: "Multi-Agent Biology Lab Simulator",
@@ -34,7 +34,7 @@ const hackathonProjects: Project[] = [
     tools: ["Crew AI", "Python", "Mistral", "Streamlit"],
     type: "hackathon",
     highlights: ["Internet of Agents Hackathon"],
-    link: "#",
+    link: "https://lablab.ai/ai-hackathons/internet-of-agents/coral-synergy/virtual-bio-lab?_gl=1*8db2j7*_up*MQ..*_ga*MTEwODMzNzM0MC4xNzcyMDE3OTA0*_ga_0DKXC1L0Y7*czE3NzIwMTc5MDQkbzEkZzAkdDE3NzIwMTc5MDQkajYwJGwwJGg2MjI0MTcxNjI.",
   },
   {
     title: "AI Grammar Learning Platform",
@@ -42,15 +42,7 @@ const hackathonProjects: Project[] = [
     tools: ["GPT-5", "Python", "Streamlit"],
     type: "hackathon",
     highlights: ["Co-Creating with GPT-5 Hackathon"],
-    link: "#",
-  },
-  {
-    title: "LaunchAI - Startup MVP Generator",
-    description: "Built for student-founders to launch startups and polish ideas with Falcon API integration for MVP generation.",
-    tools: ["Django", "Chart.js", "DRF", "Figma", "SQLite"],
-    type: "hackathon",
-    highlights: ["Falcon Hackathon"],
-    link: "#",
+    link: "https://lablab.ai/ai-hackathons/co-creating-with-gpt-5/ai-mavericks/smartlearn?_gl=1*7t23pz*_up*MQ..*_ga*MTEwODMzNzM0MC4xNzcyMDE3OTA0*_ga_0DKXC1L0Y7*czE3NzIwMTc5MDQkbzEkZzAkdDE3NzIwMTc5MDQkajYwJGwwJGg2MjI0MTcxNjI.",
   },
 ];
 
@@ -60,28 +52,28 @@ const personalProjects: Project[] = [
     description: "Web application to predict PM 2.5 and Air Quality Level with 92% accuracy using regression and classification models.",
     tools: ["Streamlit", "Hugging Face", "Supervised ML"],
     type: "personal",
-    link: "#",
+    link: "https://github.com/NajmiHassan/Air-Pollution-Prediction-System",
   },
   {
     title: "Real-Time Object Detection",
     description: "Web app detecting objects in video uploads frame by frame using YOLO v4, returning object counts.",
     tools: ["Streamlit", "Google Colab", "Hugging Face", "YOLO v4"],
     type: "personal",
-    link: "#",
+    link: "https://github.com/NajmiHassan/Real-Time-Object-Detection-and-Counting",
   },
   {
     title: "DNS Query Monitoring Tool",
     description: "Python DNS tool using Isolation Forest to detect anomalies in real-time traffic with visual/audio alerts.",
     tools: ["Python", "Scapy", "Npcap", "Isolation Forest"],
     type: "personal",
-    link: "#",
+    link: "https://github.com/NajmiHassan/dns_query_monitoring_and_analysis_tool",
   },
   {
     title: "CrewAI Blogpost Generator",
     description: "Blog post generator using CrewAI Agentic framework with multiple AI agents collaborating to create content.",
     tools: ["Streamlit", "CrewAI", "Gemini", "Serper Dev Tools"],
     type: "personal",
-    link: "#",
+    link: "https://github.com/NajmiHassan/CrewAI-Blogpost",
   },
 ];
 
@@ -126,11 +118,6 @@ const ProjectCard = ({ project }: { project: Project }) => (
         <a href={project.link || "#"} target="_blank" rel="noopener noreferrer">
           <ExternalLink className="w-4 h-4" />
           View Project
-        </a>
-      </Button>
-      <Button variant="ghost" size="sm" asChild>
-        <a href="#" target="_blank" rel="noopener noreferrer">
-          <Github className="w-4 h-4" />
         </a>
       </Button>
     </div>
