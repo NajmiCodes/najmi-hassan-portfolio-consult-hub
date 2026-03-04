@@ -1,7 +1,28 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
+
+const testimonials = [
+  {
+    name: "Haris Ghaffar",
+    role: "AI Engineer | IGNITE FYP Winner | IELTS 7.5",
+    quote:
+      "Najmi Hassan was one of the mentors whose guidance and belief in my potential helped me achieve 7.5 bands on the IELTS exam. His unwavering support was the foundation that built my success.",
+  },
+  {
+    name: "Sana Raza",
+    role: "Graduate Student @ LSU | DET Score: 150",
+    quote:
+      "Najmi Hassan's support during my DET practice sessions was invaluable. His guidance helped me score 150 overall on the Duolingo English Test — a result I'm truly proud of.",
+  },
+  {
+    name: "Amna Hassan",
+    role: "Google Generation Scholar | Stanford CIP | CS50 Winner",
+    quote:
+      "Najmi is a talented back-end developer. He fully embraced the challenge and developed the backend of our Google Gemini hackathon project on time with great communication throughout.",
+  },
+];
 
 const Index = () => {
   return (
@@ -33,6 +54,41 @@ const Index = () => {
                 </Link>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-background">
+        <div className="section-container">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              What People Say
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Hear from students and collaborators who've worked with me.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {testimonials.map((t, i) => (
+              <div
+                key={t.name}
+                className="card-elevated p-6 flex flex-col gap-4 animate-slide-up"
+                style={{ animationDelay: `${0.1 * (i + 1)}s` }}
+              >
+                <Quote className="w-8 h-8 text-primary/30" />
+                <p className="text-muted-foreground text-sm leading-relaxed flex-1">
+                  "{t.quote}"
+                </p>
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-foreground text-sm">
+                    {t.name}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
