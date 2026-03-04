@@ -7,18 +7,21 @@ const testimonials = [
   {
     name: "Haris Ghaffar",
     role: "AI Engineer | IGNITE FYP Winner | IELTS 7.5",
+    image: "/haris-ghaffar.png",
     quote:
       "Najmi Hassan was one of the mentors whose guidance and belief in my potential helped me achieve 7.5 bands on the IELTS exam. His unwavering support was the foundation that built my success.",
   },
   {
     name: "Sana Raza",
     role: "Graduate Student @ LSU | DET Score: 150",
+    image: "/sana-raza.png",
     quote:
       "Najmi Hassan's support during my DET practice sessions was invaluable. His guidance helped me score 150 overall on the Duolingo English Test — a result I'm truly proud of.",
   },
   {
     name: "Amna Hassan",
     role: "Google Generation Scholar | Stanford CIP | CS50 Winner",
+    image: "/amna-hassan.png",
     quote:
       "Najmi is a talented back-end developer. He fully embraced the challenge and developed the backend of our Google Gemini hackathon project on time with great communication throughout.",
   },
@@ -81,11 +84,18 @@ const Index = () => {
                 <p className="text-muted-foreground text-sm leading-relaxed flex-1">
                   "{t.quote}"
                 </p>
-                <div className="border-t pt-4">
-                  <p className="font-semibold text-foreground text-sm">
-                    {t.name}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                <div className="border-t pt-4 flex items-center gap-3">
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/20"
+                  />
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">
+                      {t.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">{t.role}</p>
+                  </div>
                 </div>
               </div>
             ))}
