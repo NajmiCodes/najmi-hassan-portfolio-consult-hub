@@ -1,13 +1,14 @@
-import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
-import { FileText, MessageSquare, Video, Check, ArrowRight, X, Lock } from "lucide-react";
+import { FileText, MessageSquare, Video, Check, ArrowRight, Globe, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const paymentLinks: Record<string, string> = {
-  cv: import.meta.env.VITE_SAFEPAY_LINK_CV || "",
-  sop: import.meta.env.VITE_SAFEPAY_LINK_SOP || "",
-  call: import.meta.env.VITE_SAFEPAY_LINK_CALL || "",
-};
+const ACADEMIC_BOOKING_FORM_URL =
+  import.meta.env.VITE_ACADEMIC_BOOKING_FORM_URL ||
+  "https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform";
+
+const TECHNICAL_SERVICES_FORM_URL =
+  import.meta.env.VITE_TECHNICAL_SERVICES_FORM_URL ||
+  "https://docs.google.com/forms/d/e/1FAIpQLSeqZnJmtyfpkyGCVIt6h__nCNdJQE9hdzS4uT8WEMCjUZeVnA/viewform";
 
 const services = [
   {
@@ -62,44 +63,22 @@ const services = [
   },
 ];
 
+const technicalServices = [
+  {
+    id: "website",
+    icon: Globe,
+    title: "Website Development",
+    description: "Custom websites built with modern tech—responsive, fast, and tailored to your business needs.",
+  },
+  {
+    id: "ai-apps",
+    icon: Sparkles,
+    title: "AI Powered Application Development",
+    description: "Intelligent applications leveraging AI/ML—from chatbots to automation and predictive systems.",
+  },
+];
+
 const Services = () => {
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [showModal, setShowModal] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-
-  const handleBookNow = (serviceId: string) => {
-    setSelectedService(serviceId);
-    setName("");
-    setEmail("");
-    setError("");
-    setShowModal(true);
-  };
-
-  const handleProceedToPayment = () => {
-    if (!name.trim()) {
-      setError("Please enter your name.");
-      return;
-    }
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    const link = paymentLinks[selectedService || ""];
-    if (!link) {
-      setError("Payment is not configured for this service. Please contact us directly.");
-      return;
-    }
-
-    const separator = link.includes("?") ? "&" : "?";
-    const checkoutUrl = `${link}${separator}prefilled_email=${encodeURIComponent(email)}&client_reference_id=${encodeURIComponent(name)}`;
-    window.location.href = checkoutUrl;
-  };
-
-  const service = services.find((s) => s.id === selectedService);
-
   return (
     <Layout>
       {/* Hero */}
@@ -164,12 +143,61 @@ const Services = () => {
                 </ul>
 
                 <Button
+                  asChild
                   variant={service.popular ? "gradient" : "outline"}
                   className="w-full"
-                  onClick={() => handleBookNow(service.id)}
                 >
-                  Book Now
-                  <ArrowRight className="w-4 h-4" />
+                  <a
+                    href={ACADEMIC_BOOKING_FORM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Request Service
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Technical Services */}
+      <section className="py-20 border-t border-border">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              Technical Services
+            </h2>
+            <p className="text-muted-foreground">
+              From websites to AI-powered applications, I build software that solves real problems.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {technicalServices.map((item, index) => (
+              <div
+                key={item.id}
+                className="card-elevated p-6 flex flex-col animate-slide-up"
+                style={{ animationDelay: `${0.1 * index}s` }}
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <item.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-display font-semibold text-xl text-foreground mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-6 flex-grow">
+                  {item.description}
+                </p>
+                <Button asChild variant="outline" className="w-full">
+                  <a
+                    href={TECHNICAL_SERVICES_FORM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Get in Touch
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
                 </Button>
               </div>
             ))}
@@ -187,7 +215,7 @@ const Services = () => {
             {[
               {
                 q: "How do I submit my documents?",
-                a: "After booking, you'll receive an email with instructions to submit your CV or SOP via Google Drive or email attachment.",
+                a: "After submitting the request form, you'll receive an email with instructions to submit your CV or SOP via Google Drive or email attachment.",
               },
               {
                 q: "What's the turnaround time?",
@@ -199,7 +227,7 @@ const Services = () => {
               },
               {
                 q: "What payment methods do you accept?",
-                a: "We accept Visa, Mastercard, JazzCash, Easypaisa, and bank transfers via SafePay's secure payment platform. Both Pakistani and international clients are supported.",
+                a: "Please contact us directly to arrange payment. We'll discuss payment options when you reach out.",
               },
             ].map((faq, index) => (
               <div key={index} className="card-elevated p-5">
@@ -210,78 +238,6 @@ const Services = () => {
           </div>
         </div>
       </section>
-
-      {/* Modal */}
-      {showModal && service && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/50 animate-fade-in">
-          <div className="bg-card rounded-2xl max-w-md w-full p-6 shadow-xl animate-slide-up">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-display font-semibold text-xl text-foreground">
-                Book {service.title}
-              </h3>
-              <button
-                onClick={() => setShowModal(false)}
-                className="p-2 rounded-lg hover:bg-secondary transition-colors"
-              >
-                <X className="w-5 h-5 text-muted-foreground" />
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div className="p-4 rounded-xl bg-muted/50">
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground">{service.title}</span>
-                  <div className="text-right">
-                    <span className="font-display font-semibold text-foreground">
-                      ${service.price} USD
-                    </span>
-                    <div className="text-xs text-muted-foreground">
-                      PKR {service.pricePKR.toLocaleString()}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={name}
-                  onChange={(e) => { setName(e.target.value); setError(""); }}
-                  className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  value={email}
-                  onChange={(e) => { setEmail(e.target.value); setError(""); }}
-                  className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                />
-              </div>
-
-              {error && (
-                <p className="text-sm text-red-500 text-center">{error}</p>
-              )}
-
-              <div className="pt-4 border-t border-border">
-                <Button variant="gradient" className="w-full" size="lg" onClick={handleProceedToPayment}>
-                  Proceed to Payment
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
-                <p className="text-xs text-muted-foreground text-center mt-3">
-                  You'll be redirected to SafePay's secure payment page
-                </p>
-                <div className="flex items-center justify-center gap-1.5 mt-2">
-                  <Lock className="w-3 h-3 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">
-                    Secured by SafePay — PCI-DSS Compliant
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </Layout>
   );
 };
